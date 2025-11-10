@@ -1,0 +1,100 @@
+// -----------------------------
+// KICK FORM COMPONENT STYLES
+// -----------------------------
+@use "../../styles/abstracts" as *;
+
+.kickForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.formLabel {
+  font-weight: 500;
+  color: var(--color-foreground);
+  font-size: 0.875rem;
+}
+
+.required {
+  color: #dc2626;
+}
+
+.formInput,
+.formTextarea,
+.formSelect {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background-color: var(--color-input-bg);
+  color: var(--color-foreground);
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(127, 89, 170, 0.1);
+  }
+
+  &::placeholder {
+    color: var(--color-foreground);
+    opacity: 0.4;
+  }
+}
+
+.formTextarea {
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.formSelect {
+  cursor: pointer;
+}
+
+// DatePicker wrapper with icon
+.datePickerWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.calendarIcon {
+  position: absolute;
+  left: 1rem;
+  color: var(--color-primary);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.datePickerWrapper .formInput {
+  padding-left: 3rem;
+  cursor: pointer;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}

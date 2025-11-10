@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Target } from "lucide-react";
 import Button from "../components/Button/Button";
 import { authService } from "../services/authService";
+import { useAuth } from "../contexts/AuthContext";
 import styles from "./Auth.module.scss";
 
 const SignInPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -21,7 +23,10 @@ const SignInPage = () => {
     setIsLoading(true);
 
     try {
-      await authService.signin(formData);
+      const data = await authService.signin(formData);
+
+      // Update auth context
+      login(data.user, data.token);
 
       // Redirect to dashboard on success
       navigate("/dashboard");

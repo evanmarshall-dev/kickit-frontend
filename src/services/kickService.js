@@ -1,0 +1,223 @@
+const API_URL = "http://localhost:1986";
+
+export const kickService = {
+  async fetchKicks() {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/kicks`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Failed to fetch kicks";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.err || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    const data = await response.json();
+    return data;
+  },
+
+  async createKick(kickData) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/kicks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(kickData),
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Failed to create kick";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.err || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    const data = await response.json();
+    return data;
+  },
+
+  async updateKick(kickId, kickData) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/kicks/${kickId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(kickData),
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Failed to update kick";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.err || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    const data = await response.json();
+    return data;
+  },
+
+  async deleteKick(kickId) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/kicks/${kickId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Failed to delete kick";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.err || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    return true;
+  },
+
+  async toggleStatus(kickId, newStatus) {
+    return this.updateKick(kickId, { status: newStatus });
+  },
+
+  async fetchKickById(kickId) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/kicks/${kickId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Failed to fetch kick";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.err || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    const data = await response.json();
+    return data;
+  },
+
+  async addComment(kickId, commentText) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${API_URL}/kicks/${kickId}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ text: commentText }),
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Failed to add comment";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.err || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    const data = await response.json();
+    return data;
+  },
+
+  async deleteComment(kickId, commentId) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `${API_URL}/kicks/${kickId}/comments/${commentId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      let errorMessage = "Failed to delete comment";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.err || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    return true;
+  },
+
+  async updateComment(kickId, commentId, commentText) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `${API_URL}/kicks/${kickId}/comments/${commentId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ text: commentText }),
+      }
+    );
+
+    if (!response.ok) {
+      let errorMessage = "Failed to update comment";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.err || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    const data = await response.json();
+    return data;
+  },
+};

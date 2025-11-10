@@ -1,8 +1,225 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Target, Plus, LogOut } from "lucide-react";
+import { kickService } from "../services/kickService";
+import { useAuth } from "../contexts/AuthContext";
+import KickCard from "../components/KickCard/KickCard";
+import Modal from "../components/Modal/Modal";
+import KickForm from "../components/KickForm/KickForm";
+import Button from "../components/Button/Button";
+import styles from "./DashboardPage.module.scss";
+
 const DashboardPage = () => {
+  const navigate = useNavigate();
+  const { user, logout: authLogout } = useAuth();
+  const [kicks, setKicks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingKick, setEditingKick] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    fetchKicks();
+  }, []);
+
+  const fetchKicks = async () => {
+    try {
+      setIsLoading(true);
+      setError("");
+      const data = await kickService.fetchKicks();
+      console.log("Fetched kicks:", data);
+      setKicks(data);
+    } catch (err) {
+      console.error("Error fetching kicks:", err);
+      setError(err.message || "Failed to load kicks");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCreateKick = async (formData) => {
+    try {
+      setIsSubmitting(true);
+      await kickService.createKick(formData);
+      await fetchKicks();
+      setIsModalOpen(false);
+    } catch (err) {
+      setError(err.message || "Failed to create kick");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleUpdateKick = async (formData) => {
+    try {
+      setIsSubmitting(true);
+      await kickService.updateKick(editingKick._id, formData);
+      await fetchKicks();
+      setIsModalOpen(false);
+      setEditingKick(null);
+    } catch (err) {
+      setError(err.message || "Failed to update kick");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteKick = async (kickId) => {
+    try {
+      await kickService.deleteKick(kickId);
+      await fetchKicks();
+      setDeleteConfirm(null);
+    } catch (err) {
+      setError(err.message || "Failed to delete kick");
+    }
+  };
+
+  const handleToggleStatus = async (kickId, newStatus) => {
+    try {
+      await kickService.toggleStatus(kickId, newStatus);
+      await fetchKicks();
+    } catch (err) {
+      setError(err.message || "Failed to update status");
+    }
+  };
+
+  const handleLogout = () => {
+    authLogout();
+    navigate("/");
+  };
+
+  const openCreateModal = () => {
+    setEditingKick(null);
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = (kick) => {
+    setEditingKick(kick);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setEditingKick(null);
+  };
+
   return (
-    <div className='dashboard'>
-      <h1>Dashboard</h1>
-      <p>Welcome to your adventure dashboard! This will be implemented next.</p>
+    <div className={styles.dashboard}>
+      {/* Navigation */}
+      <nav className={styles.dashboard__nav}>
+        <div className={styles.dashboard__navContainer}>
+          <div className={styles.dashboard__logo}>
+            <Target className={styles.dashboard__logoIcon} />
+            <span>KickIt</span>
+          </div>
+          <div className={styles.dashboard__navRight}>
+            <span className={styles.dashboard__username}>
+              Welcome, {user?.name || user?.username}
+            </span>
+            <button
+              className={styles.dashboard__logoutBtn}
+              onClick={handleLogout}>
+              <LogOut size={20} />
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <main className={styles.dashboard__main}>
+        <div className={styles.dashboard__header}>
+          <div>
+            <h1 className={styles.dashboard__title}>Your Adventures</h1>
+            <p className={styles.dashboard__subtitle}>
+              Track and manage your bucket list items
+            </p>
+          </div>
+          <Button
+            variant='primary'
+            size='large'
+            onClick={openCreateModal}
+            className={styles.dashboard__createBtn}>
+            <Plus size={20} />
+            <span>Add Adventure</span>
+          </Button>
+        </div>
+
+        {error && (
+          <div className={styles.dashboard__error}>
+            {error}
+            <button onClick={() => setError("")}>✕</button>
+          </div>
+        )}
+
+        {isLoading ? (
+          <div className={styles.dashboard__loading}>
+            <div className={styles.spinner}></div>
+            <p>Loading your adventures...</p>
+          </div>
+        ) : kicks.length === 0 ? (
+          <div className={styles.dashboard__empty}>
+            <Target size={64} className={styles.dashboard__emptyIcon} />
+            <h2>No Adventures Yet</h2>
+            <p>Start your journey by creating your first adventure!</p>
+            <Button variant='primary' size='large' onClick={openCreateModal}>
+              <Plus size={20} />
+              <span>Create Your First Adventure</span>
+            </Button>
+          </div>
+        ) : (
+          <div className={styles.dashboard__grid}>
+            {kicks.map((kick) => (
+              <KickCard
+                key={kick._id}
+                kick={kick}
+                onEdit={openEditModal}
+                onDelete={(kickId) => setDeleteConfirm(kickId)}
+                onToggleStatus={handleToggleStatus}
+              />
+            ))}
+          </div>
+        )}
+      </main>
+
+      {/* Create/Edit Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={editingKick ? "Edit Adventure" : "Create New Adventure"}>
+        <KickForm
+          kick={editingKick}
+          onSubmit={editingKick ? handleUpdateKick : handleCreateKick}
+          onCancel={closeModal}
+          isLoading={isSubmitting}
+        />
+      </Modal>
+
+      {/* Delete Confirmation Modal */}
+      <Modal
+        isOpen={!!deleteConfirm}
+        onClose={() => setDeleteConfirm(null)}
+        title='Delete Adventure'>
+        <div className={styles.confirmDialog}>
+          <p>Are you sure you want to delete this adventure?</p>
+          <p className={styles.confirmDialog__warning}>
+            This action cannot be undone.
+          </p>
+          <div className={styles.confirmDialog__actions}>
+            <Button variant='secondary' onClick={() => setDeleteConfirm(null)}>
+              Cancel
+            </Button>
+            <Button
+              variant='primary'
+              onClick={() => handleDeleteKick(deleteConfirm)}
+              className={styles.confirmDialog__deleteBtn}>
+              Delete
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

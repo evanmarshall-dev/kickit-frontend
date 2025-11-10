@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Target } from "lucide-react";
 import Button from "../components/Button/Button";
 import { authService } from "../services/authService";
+import { useAuth } from "../contexts/AuthContext";
 import styles from "./Auth.module.scss";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     name: "",
@@ -36,8 +38,11 @@ const SignUpPage = () => {
     setIsLoading(true);
 
     try {
-      const { confirmPassword, ...signupData } = formData;
-      await authService.signup(signupData);
+      const { confirmPassword: _confirmPassword, ...signupData } = formData;
+      const data = await authService.signup(signupData);
+
+      // Update auth context
+      login(data.user, data.token);
 
       // Redirect to dashboard on success
       navigate("/dashboard");
