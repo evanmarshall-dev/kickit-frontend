@@ -5,9 +5,10 @@
 
 // - Font & Typography
 // -----------------------------
-$font-stack: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI",
-  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-  "Helvetica Neue", sans-serif;
+$font-stack: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+  "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+$font-display: "Fredoka", "Inter", sans-serif;
 $base-line-height: 1.5;
 $base-font-weight: 400;
 

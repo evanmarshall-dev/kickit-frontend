@@ -1,0 +1,98 @@
+// -----------------------------
+// BUTTON COMPONENT STYLES
+// -----------------------------
+@use "../../styles/abstracts" as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: $btn-padding;
+  border: $btn-border;
+  border-radius: $btn-radius;
+  font-size: $btn-font-size;
+  font-weight: $btn-font-weight;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // Primary Button
+  &Primary {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-secondary);
+      border-color: var(--color-secondary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(127, 89, 170, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Secondary Button
+  &Secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(127, 89, 170, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Large Button
+  &Large {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+  }
+
+  // Light Button (for use on dark/colored backgrounds)
+  &Light {
+    background-color: white;
+    color: var(--color-primary);
+    border: 2px solid white;
+
+    &:hover:not(:disabled) {
+      background-color: transparent;
+      border-color: white;
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Full Width Button
+  &FullWidth {
+    width: 100%;
+  }
+
+  // Button with icon
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}

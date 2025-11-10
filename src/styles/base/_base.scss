@@ -19,6 +19,18 @@
   --color-hover-bg: #{$light-hover-bg};
   --color-active-bg: #{$light-active-bg};
   --color-card-bg: #{$light-card-bg};
+
+  // Additional properties for homepage
+  --bg-primary: #{$light-background};
+  --bg-secondary: #{$light-card-bg};
+  --bg-tertiary: #{$gray-100};
+  --bg-card: #{$light-input-bg};
+  --bg-input: #{$light-input-bg};
+  --bg-hover: #{$light-hover-bg};
+  --text-primary: #{$light-foreground};
+  --text-secondary: #{$gray-600};
+  --text-tertiary: #{$gray-500};
+  --border-color: #{$light-border};
 }
 
 :root[style*="color-scheme: dark"] {
@@ -33,24 +45,84 @@
   --color-input-border: #{$dark-input-border};
   --color-hover-bg: #{$dark-hover-bg};
   --color-card-bg: #{$dark-card-bg};
+
+  // Additional properties for homepage (dark mode)
+  --bg-primary: #{$dark-background};
+  --bg-secondary: #{$dark-card-bg};
+  --bg-tertiary: #{$gray-800};
+  --bg-card: #{$dark-card-bg};
+  --bg-input: #{$dark-input-bg};
+  --bg-hover: #{$dark-hover-bg};
+  --text-primary: #{$dark-foreground};
+  --text-secondary: #{$gray-400};
+  --text-tertiary: #{$gray-500};
+  --border-color: #{$dark-border};
 }
 
 html {
   scroll-behavior: smooth;
+  line-height: $base-line-height;
+  -webkit-text-size-adjust: 100%;
+  font-synthesis: $base-font-synthesis;
+  text-rendering: $base-text-rendering;
+  -webkit-font-smoothing: $webkit-font-smoothing;
+  -moz-osx-font-smoothing: $moz-osx-font-smoothing;
 }
 
 body {
   font-family: $font-stack;
+  font-weight: $base-font-weight;
   color: var(--color-foreground);
   background: var(--color-background);
   min-height: 100vh;
   min-height: 100dvh;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Focus styles for accessibility
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 main {
