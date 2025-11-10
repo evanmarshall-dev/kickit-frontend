@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:1986";
+const API_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
 export const kickService = {
   async fetchKicks() {
