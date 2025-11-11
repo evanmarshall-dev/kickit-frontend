@@ -13,8 +13,9 @@ import {
   Send,
 } from "lucide-react";
 import { kickService } from "../services/kickService";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import Button from "../components/Button/Button";
+import Navbar from "../components/Navbar/Navbar";
 import styles from "./KickDetailsPage.module.scss";
 
 const KickDetailsPage = () => {
@@ -175,6 +176,7 @@ const KickDetailsPage = () => {
 
   return (
     <div className={styles.detailsPage}>
+      <Navbar />
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>

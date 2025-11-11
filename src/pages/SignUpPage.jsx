@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Target } from "lucide-react";
 import Button from "../components/Button/Button";
 import { authService } from "../services/authService";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import styles from "./Auth.module.scss";
 
 const SignUpPage = () => {

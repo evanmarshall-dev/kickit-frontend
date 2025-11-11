@@ -1,0 +1,69 @@
+// -----------------------------
+// NAVBAR COMPONENT STYLES
+// -----------------------------
+@use "../../styles/abstracts" as *;
+
+.navbar {
+  background-color: var(--color-card-bg);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  &__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--color-foreground);
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      span {
+        font-family: $font-display;
+      }
+    }
+  }
+
+  &__logoIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-primary);
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__username {
+    color: var(--color-foreground);
+    opacity: 0.8;
+    font-size: 0.875rem;
+    display: none;
+
+    @media (min-width: 640px) {
+      display: block;
+    }
+  }
+}

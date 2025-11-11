@@ -70,7 +70,7 @@ const KickForm = ({ kick, onSubmit, onCancel, isLoading }) => {
           onChange={handleChange}
           className={styles.formTextarea}
           rows='4'
-          placeholder='Describe your adventure...'
+          placeholder='Describe your adventure... (optional)'
         />
       </div>
 
@@ -92,7 +92,7 @@ const KickForm = ({ kick, onSubmit, onCancel, isLoading }) => {
 
         <div className={styles.formGroup}>
           <label htmlFor='category' className={styles.formLabel}>
-            Category
+            Category <span className={styles.required}>*</span>
           </label>
           <select
             id='category'

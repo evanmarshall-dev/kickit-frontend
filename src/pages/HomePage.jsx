@@ -1,29 +1,21 @@
 import { Link } from "react-router-dom";
-import { MapPin, Target, Trophy, Users } from "lucide-react";
+import {
+  Target,
+  Zap,
+  TrendingUp,
+  Users,
+  CheckCircle,
+  MapPin,
+  Trophy,
+} from "lucide-react";
+import Navbar from "../components/Navbar/Navbar";
 import styles from "./HomePage.module.scss";
 
 const HomePage = () => {
   return (
-    <div className={styles.homepage}>
+    <div className={styles.homePage}>
       {/* Navigation */}
-      <nav className={styles.homepage__nav}>
-        <div className={styles.homepage__navContainer}>
-          <div className={styles.homepage__logo}>
-            <Target className={styles.homepage__logoIcon} />
-            <span>KickIt</span>
-          </div>
-          <div className={styles.homepage__navLinks}>
-            <Link
-              to='/signin'
-              className={styles.btn + " " + styles.btnSecondary}>
-              Sign In
-            </Link>
-            <Link to='/signup' className={styles.btn + " " + styles.btnPrimary}>
-              Sign Up
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className={styles.homepage__hero}>

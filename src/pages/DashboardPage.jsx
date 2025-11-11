@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Target, Plus, LogOut } from "lucide-react";
+import { Plus } from "lucide-react";
 import { kickService } from "../services/kickService";
-import { useAuth } from "../contexts/AuthContext";
 import KickCard from "../components/KickCard/KickCard";
 import Modal from "../components/Modal/Modal";
 import KickForm from "../components/KickForm/KickForm";
 import Button from "../components/Button/Button";
+import Navbar from "../components/Navbar/Navbar";
 import styles from "./DashboardPage.module.scss";
 
 const DashboardPage = () => {
-  const navigate = useNavigate();
-  const { user, logout: authLogout } = useAuth();
   const [kicks, setKicks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -85,11 +82,6 @@ const DashboardPage = () => {
     }
   };
 
-  const handleLogout = () => {
-    authLogout();
-    navigate("/");
-  };
-
   const openCreateModal = () => {
     setEditingKick(null);
     setIsModalOpen(true);
@@ -108,25 +100,7 @@ const DashboardPage = () => {
   return (
     <div className={styles.dashboard}>
       {/* Navigation */}
-      <nav className={styles.dashboard__nav}>
-        <div className={styles.dashboard__navContainer}>
-          <div className={styles.dashboard__logo}>
-            <Target className={styles.dashboard__logoIcon} />
-            <span>KickIt</span>
-          </div>
-          <div className={styles.dashboard__navRight}>
-            <span className={styles.dashboard__username}>
-              Welcome, {user?.name || user?.username}
-            </span>
-            <button
-              className={styles.dashboard__logoutBtn}
-              onClick={handleLogout}>
-              <LogOut size={20} />
-              <span>Logout</span>
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Main Content */}
       <main className={styles.dashboard__main}>

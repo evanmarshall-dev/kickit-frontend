@@ -1,30 +1,51 @@
 const API_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
+if (!API_URL) {
+  console.error(
+    "⚠️ VITE_BACK_END_SERVER_URL is not defined. API calls will fail."
+  );
+}
+
 export const kickService = {
   async fetchKicks() {
-    const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-    const response = await fetch(`${API_URL}/kicks`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+      const response = await fetch(`${API_URL}/kicks`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    if (!response.ok) {
-      let errorMessage = "Failed to fetch kicks";
-      try {
-        const errorData = await response.json();
-        errorMessage = errorData.message || errorData.err || errorMessage;
-      } catch {
-        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      if (!response.ok) {
+        let errorMessage = "Failed to load adventures";
+        try {
+          const errorData = await response.json();
+          errorMessage =
+            errorData.error ||
+            errorData.err ||
+            errorData.message ||
+            errorMessage;
+        } catch {
+          if (response.status === 401) {
+            errorMessage = "Your session has expired. Please sign in again.";
+          } else {
+            errorMessage = `Unable to load adventures. Please try again. (Error ${response.status})`;
+          }
+        }
+        throw new Error(errorMessage);
       }
-      throw new Error(errorMessage);
-    }
 
-    const data = await response.json();
-    return data;
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      if (error.message) throw error;
+      throw new Error(
+        "Unable to connect to the server. Please check your internet connection."
+      );
+    }
   },
 
   async createKick(kickData) {
