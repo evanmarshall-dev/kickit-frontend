@@ -111,7 +111,7 @@ const KickDetailsPage = () => {
   const handleDelete = async () => {
     if (
       !window.confirm(
-        "Are you sure you want to delete this adventure? This action cannot be undone."
+        "Are you sure you want to delete this kick? This action cannot be undone."
       )
     ) {
       return;
@@ -156,7 +156,7 @@ const KickDetailsPage = () => {
     return (
       <div className={styles.loadingContainer}>
         <div className={styles.spinner}></div>
-        <p>Loading adventure details...</p>
+        <p>Loading kick details...</p>
       </div>
     );
   }

@@ -74,7 +74,7 @@ const SignUpPage = () => {
         </div>
 
         <div className={styles.authPage__formContainer}>
-          <h1 className={styles.authPage__title}>Start Your Adventure</h1>
+          <h1 className={styles.authPage__title}>Start Your List</h1>
           <p className={styles.authPage__subtitle}>
             Create your account to begin tracking your bucket list
           </p>

@@ -36,18 +36,18 @@ const HomePage = () => {
         <div className={styles.homepage__heroContainer}>
           <h1 className={styles.homepage__heroTitle}>
             Turn Your Dreams Into{" "}
-            <span className={styles.homepage__heroHighlight}>Adventures</span>
+            <span className={styles.homepage__heroHighlight}>Kicks</span>
           </h1>
           <p className={styles.homepage__heroSubtitle}>
             KickIt helps you track, organize, and complete your bucket list
-            adventures. From travel goals to personal milestones, make every
-            moment count.
+            kicks. From travel goals to personal milestones, make every moment
+            count.
           </p>
           <div className={styles.homepage__heroActions}>
             <Link
               to='/signup'
               className={`${styles.btn} ${styles.btnLight} ${styles.btnLarge}`}>
-              Start Your Adventure
+              Start Your Kick
             </Link>
             <Link
               to='/signin'
@@ -71,8 +71,8 @@ const HomePage = () => {
                 Organize Your Goals
               </h3>
               <p className={styles.homepage__featureDescription}>
-                Categorize adventures by travel, skills, experiences, and more.
-                Keep your bucket list organized and actionable.
+                Categorize kicks by travel, skills, experiences, and more. Keep
+                your bucket list organized and actionable.
               </p>
             </div>
 
@@ -84,8 +84,8 @@ const HomePage = () => {
                 Track Locations & Dates
               </h3>
               <p className={styles.homepage__featureDescription}>
-                Set target dates and locations for your adventures. Turn vague
-                dreams into concrete plans.
+                Set target dates and locations for your kicks. Turn vague dreams
+                into concrete plans.
               </p>
             </div>
 
@@ -97,8 +97,8 @@ const HomePage = () => {
                 Celebrate Progress
               </h3>
               <p className={styles.homepage__featureDescription}>
-                Mark adventures as completed and track your journey with
-                progress notes. Celebrate every milestone.
+                Mark kicks as completed and track your journey with progress
+                notes. Celebrate every milestone.
               </p>
             </div>
 
@@ -110,8 +110,8 @@ const HomePage = () => {
                 Your Personal Space
               </h3>
               <p className={styles.homepage__featureDescription}>
-                Secure, private tracking of your adventures. Only you can see
-                and manage your bucket list.
+                Secure, private tracking of your kicks. Only you can see and
+                manage your bucket list.
               </p>
             </div>
           </div>
@@ -122,7 +122,7 @@ const HomePage = () => {
       <section className={styles.homepage__cta}>
         <div className={styles.homepage__ctaContainer}>
           <h2 className={styles.homepage__ctaTitle}>
-            Ready to Start Your Adventure?
+            Ready to Start Your Kick?
           </h2>
           <p className={styles.homepage__ctaSubtitle}>
             Join KickIt today and transform your bucket list into achievable

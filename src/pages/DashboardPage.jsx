@@ -106,7 +106,7 @@ const DashboardPage = () => {
       <main className={styles.dashboard__main}>
         <div className={styles.dashboard__header}>
           <div>
-            <h1 className={styles.dashboard__title}>Your Adventures</h1>
+            <h1 className={styles.dashboard__title}>Your Kicks</h1>
             <p className={styles.dashboard__subtitle}>
               Track and manage your bucket list items
             </p>
@@ -117,7 +117,7 @@ const DashboardPage = () => {
             onClick={openCreateModal}
             className={styles.dashboard__createBtn}>
             <Plus size={20} />
-            <span>Add Adventure</span>
+            <span>Add Kick</span>
           </Button>
         </div>
 
@@ -131,16 +131,16 @@ const DashboardPage = () => {
         {isLoading ? (
           <div className={styles.dashboard__loading}>
             <div className={styles.spinner}></div>
-            <p>Loading your adventures...</p>
+            <p>Loading your kicks...</p>
           </div>
         ) : kicks.length === 0 ? (
           <div className={styles.dashboard__empty}>
             <Target size={64} className={styles.dashboard__emptyIcon} />
-            <h2>No Adventures Yet</h2>
-            <p>Start your journey by creating your first adventure!</p>
+            <h2>No Kicks Yet</h2>
+            <p>Start your journey by creating your first kick!</p>
             <Button variant='primary' size='large' onClick={openCreateModal}>
               <Plus size={20} />
-              <span>Create Your First Adventure</span>
+              <span>Create Your First Kick</span>
             </Button>
           </div>
         ) : (
@@ -162,7 +162,7 @@ const DashboardPage = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title={editingKick ? "Edit Adventure" : "Create New Adventure"}>
+        title={editingKick ? "Edit Kick" : "Create New Kick"}>
         <KickForm
           kick={editingKick}
           onSubmit={editingKick ? handleUpdateKick : handleCreateKick}
@@ -175,9 +175,9 @@ const DashboardPage = () => {
       <Modal
         isOpen={!!deleteConfirm}
         onClose={() => setDeleteConfirm(null)}
-        title='Delete Adventure'>
+        title='Delete Kick'>
         <div className={styles.confirmDialog}>
-          <p>Are you sure you want to delete this adventure?</p>
+          <p>Are you sure you want to delete this kick?</p>
           <p className={styles.confirmDialog__warning}>
             This action cannot be undone.
           </p>

@@ -20,7 +20,7 @@ export const kickService = {
       });
 
       if (!response.ok) {
-        let errorMessage = "Failed to load adventures";
+        let errorMessage = "Failed to load kicks";
         try {
           const errorData = await response.json();
           errorMessage =
@@ -32,7 +32,7 @@ export const kickService = {
           if (response.status === 401) {
             errorMessage = "Your session has expired. Please sign in again.";
           } else {
-            errorMessage = `Unable to load adventures. Please try again. (Error ${response.status})`;
+            errorMessage = `Unable to load kicks. Please try again. (Error ${response.status})`;
           }
         }
         throw new Error(errorMessage);

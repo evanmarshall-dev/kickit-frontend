@@ -70,7 +70,7 @@ const KickForm = ({ kick, onSubmit, onCancel, isLoading }) => {
           onChange={handleChange}
           className={styles.formTextarea}
           rows='4'
-          placeholder='Describe your adventure... (optional)'
+          placeholder='Describe your kick... (optional)'
         />
       </div>
 
@@ -101,7 +101,7 @@ const KickForm = ({ kick, onSubmit, onCancel, isLoading }) => {
             onChange={handleChange}
             className={styles.formSelect}>
             <option value='Travel'>Travel</option>
-            <option value='Adventure'>Adventure</option>
+            <option value='Kick'>Kick</option>
             <option value='Skills'>Skills</option>
             <option value='Personal'>Personal</option>
             <option value='Career'>Career</option>

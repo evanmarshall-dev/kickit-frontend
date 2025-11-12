@@ -60,7 +60,7 @@ const SignInPage = () => {
         <div className={styles.authPage__formContainer}>
           <h1 className={styles.authPage__title}>Welcome Back</h1>
           <p className={styles.authPage__subtitle}>
-            Sign in to continue your adventure
+            Sign in to continue your kicks
           </p>
 
           {error && <div className={styles.authPage__error}>{error}</div>}
