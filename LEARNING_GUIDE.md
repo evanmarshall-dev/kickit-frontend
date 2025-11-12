@@ -8,23 +8,31 @@ Last updated: 2025-11-11
 
 ## Table of contents
 
-- Project overview
-- How the app is wired (app lifecycle)
-- File / folder walkthrough (key files)
-- Core frontend concepts and patterns used
-  - React + Vite basics
-  - Routing with react-router
-  - Context API for auth
-  - Services for API calls
-  - Component design and styling (SCSS modules)
-  - Forms and controlled components
-- Authentication & security details
-- Accessibility & UX considerations
-- Error handling & user feedback patterns
-- Testing suggestions
-- Local development, build, and deployment
-- Common pitfalls and debugging tips
-- Suggested improvements & stretch tasks
+- [KickIt Frontend - Comprehensive Engineering Guide](#kickit-frontend---comprehensive-engineering-guide)
+  - [Table of contents](#table-of-contents)
+  - [Project overview](#project-overview)
+  - [How the app is wired](#how-the-app-is-wired)
+  - [Key files and why they matter](#key-files-and-why-they-matter)
+  - [Core frontend concepts in this project](#core-frontend-concepts-in-this-project)
+    - [React + Vite](#react--vite)
+    - [Routing (react-router-dom)](#routing-react-router-dom)
+    - [Global state: Context API + hooks](#global-state-context-api--hooks)
+    - [Services pattern for API calls](#services-pattern-for-api-calls)
+    - [Component design \& styling](#component-design--styling)
+    - [Forms \& controlled inputs](#forms--controlled-inputs)
+  - [Authentication \& security (frontend specifics)](#authentication--security-frontend-specifics)
+    - [Current flow used in the app](#current-flow-used-in-the-app)
+    - [Security trade-offs](#security-trade-offs)
+    - [Token expiry \& refresh](#token-expiry--refresh)
+  - [Accessibility \& UX](#accessibility--ux)
+  - [Error handling \& user feedback patterns](#error-handling--user-feedback-patterns)
+  - [Testing suggestions](#testing-suggestions)
+  - [Local development, build and run](#local-development-build-and-run)
+  - [Common pitfalls \& debugging tips](#common-pitfalls--debugging-tips)
+  - [Suggested improvements \& stretch tasks (learn-by-doing)](#suggested-improvements--stretch-tasks-learn-by-doing)
+  - [Onboarding checklist for new engineers](#onboarding-checklist-for-new-engineers)
+  - [Reference snippets (practical patterns)](#reference-snippets-practical-patterns)
+  - [Final notes](#final-notes)
 
 ---
 
@@ -43,7 +51,7 @@ This guide explains why things are implemented the way they are and how to exten
 
 ---
 
-## How the app is wired (quick lifecycle)
+## How the app is wired
 
 1. `src/main.jsx` loads global styles and mounts the React tree:
    - Imports `globals.scss` and renders `<App />`.
@@ -93,7 +101,7 @@ This guide explains why things are implemented the way they are and how to exten
 
 - Vite provides a fast dev server, ES modules, and optimized build.
 - React 19 (or 18/19 depending on package.json) is used with functional components and hooks.
-- Use `npm run dev` (or `pnpm dev`) to run locally.
+- Use `pnpm run dev` to run locally.
 
 Why Vite? It gives near-instant cold-start and fast HMR which accelerates development.
 
