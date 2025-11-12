@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus } from "lucide-react";
+import { Plus, Target } from "lucide-react";
 import { kickService } from "../services/kickService";
 import KickCard from "../components/KickCard/KickCard";
 import Modal from "../components/Modal/Modal";
